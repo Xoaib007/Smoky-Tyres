@@ -5,7 +5,7 @@ import './General.css'
 const Header = () => {
     const navItems = <>
         <NavLink className='btn bg-transparent border-none text-black hover:text-2xl hover:bg-transparent rounded-none' to='/'>Home</NavLink>
-        <NavLink className='btn bg-transparent border-none text-black hover:bg-black hover:text-white rounded-none' to='/appointment'>Categories</NavLink>
+        <NavLink to='/categories' className='btn bg-transparent border-none text-black hover:bg-black hover:text-white rounded-none'>Categories</NavLink>
         <NavLink className='btn bg-transparent border-none text-black hover:bg-black hover:text-white rounded-none' to=''>Blog</NavLink>
         <NavLink className='btn bg-transparent border-none text-black hover:bg-black hover:text-white rounded-none' to=''>Contact Us</NavLink>
         <NavLink className='btn bg-transparent border-none text-black hover:bg-black hover:text-white rounded-none' to=''>About</NavLink>
