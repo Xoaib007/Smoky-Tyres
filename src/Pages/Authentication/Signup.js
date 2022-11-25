@@ -1,11 +1,83 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { authContext } from '../../Context/AuthProvider';
+import { GoogleAuthProvider } from 'firebase/auth';
+// import { GoogleAuthProvider } from 'firebase/auth';
 
 const Signup = () => {
-    const { register, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { createUser, updateUser, googleSignIn } = useContext(authContext);
+    const [email, setEmail] = useState('');
+
+    const provider = new GoogleAuthProvider();
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || '/';
+
+    const handleSignUp = data => {
+        let role = data.role;
+        if (role === true) {
+            role = 'Seller'
+        }
+        else {
+            role = 'Buyer'
+        }
+
+        const verified = 'false';
+
+        createUser(data.email, data.password)
+            .then(result => {
+                const userInfo = {
+                    displayName: data.name
+                };
+
+                updateUser(userInfo)
+                    .then(() => {
+
+                        saveUser(data.name, data.email, role, verified)
+                    })
+                    .catch(error => console.error(error))
+                navigate(from, { replace: true })
+
+            })
+
+            .catch((error) => console.error(error));
+
+       
+
+    }
+
+    const handleGoogleSignIn = () => {
+        const role= 'Buyer';
+        const verified= 'false';
+        googleSignIn(provider)
+            .then(result => {
+                const user= result.user;
+
+                saveUser(user.displayName, user.email, role, verified)
+                navigate(from, { replace: true })
+            })
+            .catch(error => console.error(error))
+    }
+
+    const saveUser = (name, email, role, verified) => {
+        const user = { name, email, role, verified };
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+        .then(res => res.json())
+        .then(() => {
+            setEmail(email)
+        })
+    }
 
     return (
         <div>
@@ -13,7 +85,7 @@ const Signup = () => {
                 <div className="hero-content lg:w-6/12 bg-transparent relative left-80 ">
                     <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-transparent ">
                         <h1 className="text-5xl font-bold ml-8 text-white">Sign Up</h1>
-                        <form className="card-body">
+                        <form onSubmit={handleSubmit(handleSignUp)} className="card-body">
                             <div className="form-control w-full">
                                 <label className="label">
                                     <span className="label-text text-white">Name</span>
@@ -36,6 +108,15 @@ const Signup = () => {
                                 <label className="label">
                                     <Link href="#" className="label-text-alt link link-hover text-white">Forgot password?</Link>
                                 </label>
+                                <label className="label">
+                                    <span className="label-text w-fit mx-auto text-white p-2 mb-2 border-b-2 border-red-600">What's your purpose here?</span>
+                                </label>
+                                <div className='flex'>
+                                    <p className='text-white'>Wants to buy</p>
+                                    <input {...register("role")} type="checkbox" className="toggle toggle-error" />
+                                    <p className='text-white'>Wants to sell</p>
+                                </div>
+
                             </div>
                             <div className="form-control mt-3">
                                 <button type='submit' className="btn bg-red-600 text-white rounded-none hover:bg-white hover:text-black">Sign Up</button>
@@ -45,7 +126,7 @@ const Signup = () => {
                             <div className="divider text-white">OR</div>
 
                             <div>
-                                <button className='flex justify-center mx-auto mb-5'>
+                                <button onClick={handleGoogleSignIn} className='flex justify-center mx-auto mb-5'>
                                     <FontAwesomeIcon className=' w-6 h-6 border-black  p-2 rounded-full border-2  relative left-5 bg-white' icon={faGoogle} />
                                     <p className='border-black border-r-2 border-t-2 border-b-2 rounded-r-full p-2 pl-7 bg-white hover:text-red-600 hover:font-bold'>Sign Up with Google</p>
                                 </button>

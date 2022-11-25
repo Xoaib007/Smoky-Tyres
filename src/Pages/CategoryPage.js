@@ -17,8 +17,8 @@ const CategoryPage = () => {
 
                     {
                         categories?.map(category =>
-                            <Link className='w-fit'>
-                                <div key={category._id} className="w-72">
+                            <Link to={`/cars/${category._id}`} key={category._id} className='w-fit'>
+                                <div className="w-72">
                                     <div className="px-5 h-80 pt-5 pb-36 mx-14 rounded-full bg2 shadow-2xl ">
                                         <div className="w-24 h-24 px-6 py-7 mb-5 mx-auto rounded-full bg-white">
                                             <img src={`${category.icon}`} alt="Eco-friendly" className='relative bottom-1' />

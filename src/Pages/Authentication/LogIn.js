@@ -1,18 +1,45 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { authContext } from '../../Context/AuthProvider';
+import { GoogleAuthProvider } from 'firebase/auth';
 
 const LogIn = () => {
-    const { register, formState: { errors } } = useForm();
+    const { register,handleSubmit, formState: { errors } } = useForm();
+    const { signin, googleSignIn } = useContext(authContext);
+    const provider = new GoogleAuthProvider();
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || '/';
+
+    const handleLogin = (data, e) => {
+        const form = e.target
+        signin(data.email, data.password)
+            .then(result => 
+                {form.reset();
+                navigate(from, { replace: true })
+            })
+            .catch(error => console.error(error))
+    }
+
+    const handleGoogleSignIn = () => {
+        googleSignIn(provider)
+            .then(result => {
+                navigate(from, { replace: true })
+            })
+            .catch(error => console.error(error))
+    }
+
     return (
         <div>
             <div className="hero min-h-screen bg3">
                 <div className="hero-content lg:w-96 bg-transparent relative left-80">
                     <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl">
                         <h1 className="text-5xl font-bold text-white">Log In</h1>
-                        <form className="card-body">
+                        <form onSubmit={handleSubmit(handleLogin)} className="card-body">
                             <div className="form-control w-full">
                                 <label className="label">
                                     <span className="label-text text-white">Email</span>
@@ -39,7 +66,7 @@ const LogIn = () => {
                             <div className="divider text-white">OR</div>
 
                             <div>
-                            <button className='flex justify-center mx-auto mb-5'>
+                            <button onClick={handleGoogleSignIn} className='flex justify-center mx-auto mb-5'>
                                     <FontAwesomeIcon className=' w-6 h-6 border-black  p-2 rounded-full border-2  relative left-5 bg-white' icon={faGoogle} />
                                     <p className='border-black border-r-2 border-t-2 border-b-2 rounded-r-full p-2 pl-7 bg-white hover:text-red-600 hover:font-bold'>Sign Up with Google</p>
                                 </button>
