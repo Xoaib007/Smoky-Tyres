@@ -5,6 +5,21 @@
     background-image: url('https://i.ibb.co/wp6KwPc/banner.jpg');
     background-repeat: no-repeat;
 }
+
 .bg2{
     background-color: #f5f5f5;
+}
+.bg3 {
+    background-image: url('https://i.ibb.co/vmsM2Kh/Tough-Built-Desktop-1600x900-v2.jpg');
+    background-repeat: no-repeat;
+}
+.active{
+    padding-bottom: 5px;
+    background-color: transparent;
+    border-bottom: 4px solid black;
+    border-radius: 0px;
+}
+.errorbanner{
+    background-image: url('https://i.ibb.co/jhgCY33/error.jpg');
+    background-repeat: no-repeat;
 }

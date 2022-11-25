@@ -1,14 +1,17 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import './General.css'
+import './General.css';
+import { faArrowRightToBracket } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 
 const Header = () => {
     const navItems = <>
-        <NavLink className='btn bg-transparent border-none text-black hover:text-2xl hover:bg-transparent rounded-none' to='/'>Home</NavLink>
-        <NavLink to='/categories' className='btn bg-transparent border-none text-black hover:bg-black hover:text-white rounded-none'>Categories</NavLink>
-        <NavLink className='btn bg-transparent border-none text-black hover:bg-black hover:text-white rounded-none' to=''>Blog</NavLink>
-        <NavLink className='btn bg-transparent border-none text-black hover:bg-black hover:text-white rounded-none' to=''>Contact Us</NavLink>
-        <NavLink className='btn bg-transparent border-none text-black hover:bg-black hover:text-white rounded-none' to=''>About</NavLink>
+        <NavLink activeClassName="active" className='btn bg-transparent border-none text-black hover:bg-black hover:text-white  rounded-none' to='/'>Home</NavLink>
+        <NavLink activeClassName="active" to='/categories' className='btn bg-transparent border-none text-black hover:bg-black hover:text-white rounded-none'>Categories</NavLink>
+        <NavLink activeClassName="active" className='btn bg-transparent border-none text-black hover:bg-black hover:text-white rounded-none' to='/blog'>Blog</NavLink>
+        <NavLink activeClassName="active" className='btn bg-transparent border-none text-black hover:bg-black hover:text-white rounded-none' to='/contact'>Contact Us</NavLink>
+        <NavLink activeClassName="active" className='btn bg-transparent border-none text-black hover:bg-black hover:text-white rounded-none' to='/about'>About</NavLink>
     </>
     return (
         <div>
@@ -20,7 +23,7 @@ const Header = () => {
                         </label>
                         <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                             {navItems}
-                            <Link className="btn bg-red-600 border-none text-black rounded-none">Get started</Link>
+                            <Link to='/user/signup' className="btn bg-red-600 border-none text-black rounded-none">Get started</Link>
                         </ul>
                     </div>
                     <div className='flex'>
@@ -37,7 +40,7 @@ const Header = () => {
                     </ul>
                 </div>
                 <div className='navbar-end lg:block text-right hidden'>
-                    <Link className="btn bg-red-600 border-none text-white hover:bg-black hover:text-white rounded-none">Get started</Link>
+                    <Link to='/user/signup' className="btn bg-red-600 border-none text-white hover:bg-black hover:text-white rounded-none">Get started<FontAwesomeIcon icon={faArrowRightToBracket} className='w-4 h-4 ml-2'></FontAwesomeIcon></Link>
                 </div>
             </div>
         </div>
