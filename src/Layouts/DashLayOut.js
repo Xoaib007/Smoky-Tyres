@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
-import Footer from '../Components/Shared/Footer';
 import Header from '../Components/Shared/Header';
 import { authContext } from '../Context/AuthProvider';
+import '../Components/Shared/General.css'
 
 const DashLayOut = () => {
     const { user } = useContext(authContext);
@@ -24,29 +24,29 @@ const DashLayOut = () => {
             <Header/>
             <div className="drawer drawer-mobile">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content flex flex-col items-center justify-center bg-red-100">
+                <div className="drawer-content bg-red-100">
                     {/* <!-- Page content here --> */}
                     <Outlet/>
 
                 </div>
-                <div className="drawer-side bg-white pt-20">
+                <div className="drawer-side bg-white pt-20 w-60">
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-                    <ul className="menu p-4 w-80 bg-base-100 text-base-content">
+                    <ul className="menu w-80 mt-0 bg-base-100 text-base-content">
                         {
                             currentUser?.role === 'Buyer' ?
                                 <>
-                                    <li><Link>My Orders</Link></li>
+                                    <li><Link to='/dash/orders'>My Orders</Link></li>
                                 </>
                             : currentUser?.role === 'Seller' ?
                                 <>
-                                    <li><Link to='/dash/addproduct'>Post a Car</Link></li>
-                                    <li><Link>My Posts</Link></li>
+                                    <li><Link to='/dash/seller/addproduct'>Post a Car</Link></li>
+                                    <li><Link to='/dash/seller/addedproducts'>My Posts</Link></li>
                                 </>
                             : currentUser?.role === 'Admin' ?
                                 <>
-                                    <li><Link>All Buyers</Link></li>
-                                    <li><Link>All Sellers</Link></li>
-                                    <li><Link>Reported Items</Link></li>
+                                    <li><Link to='/dash/admin/allbuyers'>All Buyers</Link></li>
+                                    <li><Link to='/dash/admin/allsellers'>All Sellers</Link></li>
+                                    <li><Link to='/dash/admin/reporteditems'>Reported Items</Link></li>
                                 </>
                             :
                                 <>

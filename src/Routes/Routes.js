@@ -6,9 +6,11 @@ import AllCars from "../Pages/AllCars";
 import LogIn from "../Pages/Authentication/LogIn";
 import Signup from "../Pages/Authentication/Signup";
 import CategoryPage from "../Pages/CategoryPage";
+import AllPosts from "../Pages/Dashboard/AllPosts";
 import CreatePost from "../Pages/Dashboard/CreatePost";
 import ErrorPage from "../Pages/ErrorPage";
 import HomePage from "../Pages/Home/HomePage";
+import SingleCar from "../Pages/SingleCar";
 import PrivateRoutes from "./PrivateRoute";
 
 const router= createBrowserRouter([
@@ -30,6 +32,11 @@ const router= createBrowserRouter([
                 element:<PrivateRoutes><AllCars/></PrivateRoutes>,
                 loader:({params})=> fetch(`http://localhost:5000/cars/${params.category}`),
             },
+            {
+                path:'/cars/id/:id',
+                element:<PrivateRoutes><SingleCar/></PrivateRoutes>,
+                loader:({params})=> fetch(`http://localhost:5000/cars/id/${params.id}`),
+            }
         ]
     },
     {
@@ -53,8 +60,12 @@ const router= createBrowserRouter([
         errorElement: <ErrorPage/>,
         children:[
             {
-                path:'/dash/addproduct',
+                path:'/dash/seller/addproduct',
                 element:<CreatePost/>
+            },
+            {
+                path:'/dash/seller/addedproducts',
+                element:<AllPosts/>
             }
         ]
     }

@@ -11,6 +11,7 @@ const Categories = () => {
 
     const categories= categoriesData.slice(3);
     return (
+        
         <div className='mt-56'>
             <div className=' w-fit px-10 border-x-8 border-red-600 mx-auto mb-20'>
                 <p className='text-3xl font-bold '>Categories</p>

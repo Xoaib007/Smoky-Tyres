@@ -19,6 +19,9 @@
     border-bottom: 4px solid black;
     border-radius: 0px;
 }
+.active2{
+    background-color: rgb(254 226 226);
+}
 .errorbanner{
     background-image: url('https://i.ibb.co/jhgCY33/error.jpg');
     background-repeat: no-repeat;

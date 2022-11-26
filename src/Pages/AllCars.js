@@ -1,22 +1,28 @@
 import React from 'react';
-import { Link, useLoaderData } from 'react-router-dom';
-import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { Link, useLoaderData, useNavigate } from 'react-router-dom';
+import { faAngleRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const AllCars = () => {
     const cars = useLoaderData();
 
+    const navigate = useNavigate();
+
     return (
-        <div className='grid gap-6 mx-32 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-20 justify-items-center mb-20'>
+        <div>
+            <button onClick={() => navigate(-1)} className='w-fit relative right-1/3 top-10 mb-10 hover:text-red-600'><FontAwesomeIcon className='w-10 h-10' icon={faArrowLeft}></FontAwesomeIcon></button>
+            
+            <div className='grid gap-6 mx-32 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-20 justify-items-center mb-20 min-h-screen'>
+            
             {
                 cars?.map(car =>
-                    <div key={car._id} className=" program card card-compact w-96 bg2 rounded-3xl">
+                    <div key={car._id} className=" program card card-compact w-96 bg2 h-fit rounded-3xl">
                         <div>
                             <img className='card-image rounded-3xl' src={car.photo} alt="" />
                         </div>
                         <div className="card-body">
                             <div className='flex flex-col '>
-                            <h2 className="card-title text-2xl text-center font-bold">{car.brand} {car.model}</h2>
+                                <h2 className="card-title text-2xl text-center font-bold">{car.brand} {car.model}</h2>
 
                                 <div className="align flex mt-4">
                                     <p className='font-bold text-left'>Asking Price: ${car.askingPrice}</p>
@@ -31,7 +37,7 @@ const AllCars = () => {
                                 <p className='text-left font-bold mt-6'>Seller: {car.seller}</p>
 
                             </div>
-                            <Link className='btn btn-lg bg-transparent text-black
+                            <Link to={`/cars/id/${car._id}`} className='btn btn-lg bg-transparent text-black
                                 border-none hover:bg-transparent hover:text-red-600 relative left-28 px-0 mx-0 '
                             ><FontAwesomeIcon className='h-8 w-8' icon={faAngleRight} /></Link>
 
@@ -40,6 +46,8 @@ const AllCars = () => {
                 )
             }
         </div>
+        </div>
+        
     );
 };
 
