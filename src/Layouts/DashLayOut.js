@@ -24,7 +24,7 @@ const DashLayOut = () => {
             <Header/>
             <div className="drawer drawer-mobile">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content bg-red-100">
+                <div className="drawer-content bg-red-100 mt-10">
                     {/* <!-- Page content here --> */}
                     <Outlet/>
 
@@ -35,7 +35,8 @@ const DashLayOut = () => {
                         {
                             currentUser?.role === 'Buyer' ?
                                 <>
-                                    <li><Link to='/dash/orders'>My Orders</Link></li>
+                                    <li><Link to='/dash/buyer/orders'>My Bookings</Link></li>
+                                    <li><Link to='/dash/buyer/saved'>My Bookings</Link></li>
                                 </>
                             : currentUser?.role === 'Seller' ?
                                 <>

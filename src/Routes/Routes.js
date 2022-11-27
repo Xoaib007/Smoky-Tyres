@@ -7,6 +7,7 @@ import LogIn from "../Pages/Authentication/LogIn";
 import Signup from "../Pages/Authentication/Signup";
 import CategoryPage from "../Pages/CategoryPage";
 import AllPosts from "../Pages/Dashboard/AllPosts";
+import Booked from "../Pages/Dashboard/Booked";
 import CreatePost from "../Pages/Dashboard/CreatePost";
 import ErrorPage from "../Pages/ErrorPage";
 import HomePage from "../Pages/Home/HomePage";
@@ -28,7 +29,7 @@ const router= createBrowserRouter([
                 element:<CategoryPage/>
             },
             {
-                path:'/cars/:category',
+                path:'/category/:category',
                 element:<PrivateRoutes><AllCars/></PrivateRoutes>,
                 loader:({params})=> fetch(`http://localhost:5000/cars/${params.category}`),
             },
@@ -56,7 +57,7 @@ const router= createBrowserRouter([
     },
     {
         path:'/dash',
-        element:<DashLayOut/>,
+        element:<PrivateRoutes><DashLayOut/></PrivateRoutes>,
         errorElement: <ErrorPage/>,
         children:[
             {
@@ -65,6 +66,14 @@ const router= createBrowserRouter([
             },
             {
                 path:'/dash/seller/addedproducts',
+                element:<AllPosts/>
+            },
+            {
+                path:'/dash/buyer/orders',
+                element:<Booked/>
+            },
+            {
+                path:'/dash/buyer/saved',
                 element:<AllPosts/>
             }
         ]

@@ -20,7 +20,7 @@ const Categories = () => {
 
                 {
                     categories?.map(category =>
-                        <Link  to={`/cars/${category._id}`} key={category._id} className='w-fit'>
+                        <Link  to={`/category/${category._id}`} key={category._id} className='w-fit'>
                             <div className="lg:w-72 w-56">
                                 <div className="px-5 h-80 pt-5 pb-36 mx-14 rounded-full bg2 shadow-2xl ">
                                     <div className="lg:w-24 lg:h-24 w-16 h-16 px-6 py-7 mb-5 mx-auto rounded-full bg-white">

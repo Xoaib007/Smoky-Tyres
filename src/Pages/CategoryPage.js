@@ -17,7 +17,7 @@ const CategoryPage = () => {
 
                     {
                         categories?.map(category =>
-                            <Link to={`/cars/${category._id}`} key={category._id} className='w-fit'>
+                            <Link to={`/category/${category._id}`} key={category._id} className='w-fit'>
                                 <div className="w-72">
                                     <div className="px-5 h-80 pt-5 pb-36 mx-14 rounded-full bg2 shadow-2xl ">
                                         <div className="w-24 h-24 px-6 py-7 mb-5 mx-auto rounded-full bg-white">
