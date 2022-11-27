@@ -34,7 +34,7 @@ const AllCars = () => {
                                 <div>
                                     <p className='text-left'>{car.about.slice(0, 100) + '...'}</p>
                                 </div>
-                                <p className='text-left font-bold mt-6'>Seller: {car.seller}</p>
+                                <p className='text-left font-bold mt-6'>Posted By: {car.seller}</p>
 
                             </div>
                             <Link to={`/cars/id/${car._id}`} className='btn btn-lg bg-transparent text-black

@@ -25,7 +25,6 @@ const AllPosts = () => {
                         <thead>
                             <tr>
                                 <th></th>
-                                <th></th>
                                 <th>Name</th>
                                 <th>Asking Price</th>
                                 <th>Driven</th>

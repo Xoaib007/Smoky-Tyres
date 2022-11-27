@@ -35,8 +35,8 @@ const DashLayOut = () => {
                         {
                             currentUser?.role === 'Buyer' ?
                                 <>
-                                    <li><Link to='/dash/buyer/orders'>My Bookings</Link></li>
-                                    <li><Link to='/dash/buyer/saved'>My Bookings</Link></li>
+                                    <li><Link to='/dash/buyer/bookings'>My Bookings</Link></li>
+                                    <li><Link to='/dash/buyer/saved'>Saved Cars</Link></li>
                                 </>
                             : currentUser?.role === 'Seller' ?
                                 <>

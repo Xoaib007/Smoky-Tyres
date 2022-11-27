@@ -15,8 +15,6 @@ const CreatePost = () => {
 
     // it adds 2 days to a current date
     current.setDate(current.getDate());
-    
-console.log(current.toDateString());
 
     const imgBBKey = process.env.REACT_APP_imageBB_Key;
 
@@ -69,7 +67,6 @@ console.log(current.toDateString());
                     })
                         .then(res => res.json())
                         .then(result => {
-                            console.log(result)
                             form.reset();
                             navigate('/dash/seller/addedproducts')
                         })
