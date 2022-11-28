@@ -6,7 +6,7 @@ import { authContext } from '../../Context/AuthProvider';
 const AllPosts = () => {
     const { user } = useContext(authContext);
 
-    const { data: allPosts = [] } = useQuery({
+    const { data: allPosts = []} = useQuery({
         queryKey: ['allPosts'],
         queryFn: async () => {
             const res = await fetch(`http://localhost:5000/cars/email/${user?.email}`);
@@ -16,6 +16,16 @@ const AllPosts = () => {
     });
 
 
+    const handleAdvertise= (data)=>{
+        fetch('http://localhost:5000/advertise',{
+            method: 'POST',
+            headers:{
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(data._id)
+        })
+        .then(res=> res.json())
+    }
     return (
         <div>
             <div>
@@ -25,10 +35,12 @@ const AllPosts = () => {
                         <thead>
                             <tr>
                                 <th></th>
+                                <th></th>
                                 <th>Name</th>
                                 <th>Asking Price</th>
                                 <th>Driven</th>
                                 <th>Added on</th>
+                                <th></th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -59,9 +71,12 @@ const AllPosts = () => {
                                         <td>${post.askingPrice}</td>
                                         <td>{post.kmDriven} km</td>
                                         <td>{post.addedDate}</td>
-                                        <th>
+                                        <td>
                                             <Link to={`/cars/id/${post._id}`} className="btn bg-red-600 rounded-none btn-xs">Details</Link>
-                                        </th>
+                                        </td>
+                                        <td>
+                                            <button onClick={()=>handleAdvertise(post)} className="btn btn-xs bg-red-600 rounded-none border-2 border-red-600 hover:bg-white hover:text-red-600 hover:border-2 hover:border-red-600">Advertise</button>
+                                        </td>
                                     </tr>)
                             }
                         </tbody>
