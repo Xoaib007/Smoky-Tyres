@@ -47,7 +47,7 @@ const DashLayOut = () => {
                                 <>
                                     <li><Link to='/dash/admin/allbuyers'>All Buyers</Link></li>
                                     <li><Link to='/dash/admin/allsellers'>All Sellers</Link></li>
-                                    <li><Link to='/dash/admin/reporteditems'>Reported Items</Link></li>
+                                    <li><Link to='/dash/admin/reported'>Reported Items</Link></li>
                                 </>
                             :
                                 <>

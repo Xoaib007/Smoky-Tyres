@@ -16,8 +16,8 @@ const Booked = () => {
 
     const handleCancelBooking = (data) => {
         console.log(data)
-        fetch(`http://localhost:5000/testdrivebooking/${data}`, {
-            method: 'DELETE'
+        fetch(`http://localhost:5000/testdrivebooking/${data._id}`, {
+            method: 'DELETE',
             // headers: {
             //     authorization: `bearer ${localStorage.getItem('accessToken')}`
             // }
@@ -78,7 +78,7 @@ const Booked = () => {
                                                 <label htmlFor="my-modal-6" className="btn btn-xs bg-red-600 rounded-none border-2 border-red-600 hover:bg-white hover:text-red-600 hover:border-2 hover:border-red-600">Cancel Booking</label>
                                             </>
                                             :
-                                            <button className="btn btn-xs bg-red-600 rounded-none border-2 border-red-600 hover:bg-red-600 cursor-not-allowed hover:text-white hover:border-2 hover:border-red-600 mr-5" >Paid</button>
+                                            <button className="btn btn-xs bg-green-600 rounded-none border-2 border-green-600 hover:bg-green-600 cursor-not-allowed hover:text-white hover:border-2 hover:border-green-600 mr-5" >Paid</button>
 
                                         }
 
@@ -94,7 +94,7 @@ const Booked = () => {
                                             <div className="modal-action">
                                                 <label htmlFor="my-modal-6" className="btn p-2 w-32 bg-red-600 rounded-none border-2 border-red-600 hover:bg-white hover:text-red-600 hover:border-2 hover:border-red-600">Cancel</label>
 
-                                                <button onClick={() => handleCancelBooking(booking._id)} htmlFor="my-modal-6" className="btn w-32 bg-red-600 rounded-none border-2 border-red-600 hover:bg-white hover:text-red-600 hover:border-2 hover:border-red-600">Confirm</button>
+                                                <button onClick={() => handleCancelBooking(booking)} htmlFor="my-modal-6" className="btn w-32 bg-red-600 rounded-none border-2 border-red-600 hover:bg-white hover:text-red-600 hover:border-2 hover:border-red-600">Confirm</button>
                                             </div>
                                         </div>
                                     </div>

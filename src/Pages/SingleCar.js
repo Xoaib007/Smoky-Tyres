@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { authContext } from '../Context/AuthProvider';
 import { faBookmark } from '@fortawesome/free-regular-svg-icons';
 import TestDriveModal from './TestDriveModal';
+import { useQuery } from '@tanstack/react-query';
 
 const SingleCar = () => {
     const [modal, setModal] = useState(null );
@@ -14,6 +15,11 @@ const SingleCar = () => {
     const { user } = useContext(authContext);
 
     const navigate = useNavigate();
+
+    const { data: savedCar = [], refetch} = useQuery({
+        queryKey: ['booking'],
+        queryFn: () => fetch(`http://localhost:5000/savedpost/${car._id}`).then(res => res.json())
+    })
 
     const [currentUser, setCurrentUser] = useState(null);
 
@@ -24,6 +30,48 @@ const SingleCar = () => {
             })
         }
     }, [user?.email])
+
+    const handleSaveCar= ()=>{
+        const savedcar = {
+            buyer: currentUser._id,
+            buyerName: currentUser.name,
+            buyerEmail: currentUser.email,
+            car: car._id,
+            carName: car.year+' '+car.brand+' '+car.model,
+            carSeller: car.seller,
+            carPhoto: car.photo
+        }
+        fetch('http://localhost:5000/savedpost',{
+            method: 'POST',
+            headers:{
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(savedcar)
+        })
+        .then(res=> res.json())
+        .then(data=> refetch())
+    }
+
+    const handleReport= (data)=>{
+        const reportcar = {
+            buyer: currentUser._id,
+            buyerName: currentUser.name,
+            buyerEmail: currentUser.email,
+            car: car._id,
+            carName: car.year+' '+car.brand+' '+car.model,
+            carSeller: car.seller,
+            carPhoto: car.photo
+        }
+        fetch('http://localhost:5000/reportedpost',{
+            method: 'POST',
+            headers:{
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(reportcar)
+        })
+        .then(res=> res.json())
+        .then(data=> refetch())
+    }
 
     return (
         <div className='min-h-screen'>
@@ -46,12 +94,14 @@ const SingleCar = () => {
                             <>
                                 <div className='flex'>
                                     <label onClick={() => setModal(car)} htmlFor='TestDriveModal' className="w-96 btn bg-red-600 text-xl font-bold hover:border-red-600 hover:bg-white hover:text-red-600 rounded-none mt-10">Book a test drive now!!</label>
+                                    {
+                                        savedCar.length > 0 ?
+                                        <div className='mt-1'><img className='w-9 h-9 mt-10 ml-8' src={svg} alt='' /></div>
+                                        :
+                                        <button onClick={handleSaveCar} className=''><FontAwesomeIcon className='w-9 h-9 mt-10 ml-8' icon={faBookmark} /></button>
 
-                                    <label className="swap">
-                                        <input type="checkbox" onClick="EnableDisableTextBox(this)" />
-                                        <div className='swap-off'><FontAwesomeIcon className='w-9 h-9 mt-10 ml-8' icon={faBookmark} /></div>
-                                        <div className='swap-on'><img className='w-9 h-9 mt-10 ml-8' src={svg} alt='' /></div>
-                                    </label>
+                                    }
+                                    
                                 </div>
                             </>
                             :
@@ -102,7 +152,14 @@ const SingleCar = () => {
                     </div>
                     <p className='text-right'>{car.about}</p>
                 </div>
+                
             </div>
+            {
+                    currentUser?.role === 'Buyer' ?
+                    <button onClick={()=>handleReport(car)} className='btn bg-white border-x-2 border-t-2 border-black rounded-none text-black hover:bg-black hover:text-white'>Report about this post</button>
+                    :
+                    <p></p>
+                }
 
             {
                 modal &&

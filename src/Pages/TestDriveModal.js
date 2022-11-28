@@ -40,6 +40,7 @@ const TestDriveModal = ({ modal, setModal, currentUser }) => {
             body: JSON.stringify(testDriveBooking)
         })
             .then(res => res.json())
+            .then(data=> setModal(null))
     }
     return (
         <div>

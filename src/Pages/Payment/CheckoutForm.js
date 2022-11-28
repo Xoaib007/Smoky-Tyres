@@ -7,7 +7,7 @@ const CheckoutForm = ({booking}) => {
 
     const [success, setSuccess] = useState('');
     const [transactionId, setTransactionId] = useState('');
-    const [processing, setProcessing] = useState('');
+    const [processing, setProcessing] = useState(false);
     const [cardError, setCardError] = useState();
     const [clientSecret, setClientSecret] = useState("");
 
@@ -62,7 +62,7 @@ const CheckoutForm = ({booking}) => {
 
         if(confirmError){
             setCardError(confirmError.message)
-            return
+            return;
         }
         if(paymentIntent.status === "succeeded"){
             
@@ -82,7 +82,7 @@ const CheckoutForm = ({booking}) => {
                 },
                 body: JSON.stringify(payment)
             })
-            .then(res=> res.json)
+            .then(res=> res.json())
             .then(data=>{
                 if(data.insertedId){
                     setSuccess('Transaction has been successfully done.');
@@ -91,7 +91,8 @@ const CheckoutForm = ({booking}) => {
                 }
             })
         }
-            setProcessing(false)
+        
+        setProcessing(false)
         console.log('paymentIntent', paymentIntent)
 
 

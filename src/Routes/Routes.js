@@ -5,10 +5,15 @@ import Main from "../Layouts/Main";
 import AllCars from "../Pages/AllCars";
 import LogIn from "../Pages/Authentication/LogIn";
 import Signup from "../Pages/Authentication/Signup";
+import Blog from "../Pages/Blog";
 import CategoryPage from "../Pages/CategoryPage";
+import AllBuyers from "../Pages/Dashboard/AllBuyers";
 import AllPosts from "../Pages/Dashboard/AllPosts";
+import AllSellers from "../Pages/Dashboard/AllSellers";
 import Booked from "../Pages/Dashboard/Booked";
 import CreatePost from "../Pages/Dashboard/CreatePost";
+import ReportedPosts from "../Pages/Dashboard/ReportedPosts";
+import SavedCars from "../Pages/Dashboard/SavedCars";
 import ErrorPage from "../Pages/ErrorPage";
 import HomePage from "../Pages/Home/HomePage";
 import Payment from "../Pages/Payment/Payment";
@@ -28,6 +33,10 @@ const router= createBrowserRouter([
             {
                 path:'/categories',
                 element:<CategoryPage/>
+            },
+            {
+                path:'/blog',
+                element:<Blog/>
             },
             {
                 path:'/category/:category',
@@ -80,7 +89,19 @@ const router= createBrowserRouter([
             },
             {
                 path:'/dash/buyer/saved',
-                element:<AllPosts/>
+                element:<SavedCars/>
+            },
+            {
+                path:'/dash/admin/allbuyers',
+                element:<AllBuyers/>
+            },
+            {
+                path:'/dash/admin/allsellers',
+                element:<AllSellers/>
+            },
+            {
+                path:'/dash/admin/reported',
+                element:<ReportedPosts/>
             }
         ]
     }
