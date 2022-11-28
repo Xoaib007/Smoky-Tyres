@@ -1,4 +1,3 @@
-import { PhoneAuthCredential } from "firebase/auth";
 import { createBrowserRouter } from "react-router-dom";
 import AuthenticatioPage from "../Layouts/AuthenticatioPage";
 import DashLayOut from "../Layouts/DashLayOut";
@@ -12,7 +11,7 @@ import Booked from "../Pages/Dashboard/Booked";
 import CreatePost from "../Pages/Dashboard/CreatePost";
 import ErrorPage from "../Pages/ErrorPage";
 import HomePage from "../Pages/Home/HomePage";
-import Payment from "../Pages/Payment";
+import Payment from "../Pages/Payment/Payment";
 import SingleCar from "../Pages/SingleCar";
 import PrivateRoutes from "./PrivateRoute";
 

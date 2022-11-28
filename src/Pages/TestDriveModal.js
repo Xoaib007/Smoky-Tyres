@@ -3,6 +3,7 @@ import React from 'react';
 const TestDriveModal = ({ modal, setModal, currentUser }) => {
 
     const handleTestDriveSubmit= (e)=>{
+        e.preventDefault();
         const form= e.target;
         const buyerPhone= form.phone.value;
         const city= form.city.value;
