@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js'
+import toast from 'react-hot-toast';
 
 const CheckoutForm = ({booking}) => {
     const stripe = useStripe();
@@ -12,7 +13,7 @@ const CheckoutForm = ({booking}) => {
     const [clientSecret, setClientSecret] = useState("");
 
     useEffect(() => {
-        fetch("http://localhost:5000/create-payment-intent", {
+        fetch("https://smoky-tyres-server.vercel.app/create-payment-intent", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ price: 120 }),
@@ -61,6 +62,7 @@ const CheckoutForm = ({booking}) => {
         );
 
         if(confirmError){
+            toast.error(confirmError.message)
             setCardError(confirmError.message)
             return;
         }
@@ -75,7 +77,7 @@ const CheckoutForm = ({booking}) => {
                 bookingId: booking._id
             }
 
-            fetch('http://localhost:5000/payment',{
+            fetch('https://smoky-tyres-server.vercel.app/payment',{
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -85,6 +87,7 @@ const CheckoutForm = ({booking}) => {
             .then(res=> res.json())
             .then(data=>{
                 if(data.insertedId){
+                    toast.success('Transaction has been successfully done.')
                     setSuccess('Transaction has been successfully done.');
                     setTransactionId(paymentIntent.id);
         

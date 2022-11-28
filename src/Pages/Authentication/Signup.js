@@ -5,6 +5,7 @@ import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { authContext } from '../../Context/AuthProvider';
 import { GoogleAuthProvider } from 'firebase/auth';
+import toast from 'react-hot-toast';
 // import { GoogleAuthProvider } from 'firebase/auth';
 
 const Signup = () => {
@@ -40,12 +41,14 @@ const Signup = () => {
 
                         saveUser(data.name, data.email, role, isVerified)
                     })
-                    .catch(error => console.error(error))
+                    .catch(error =>toast.error(error))
                 navigate(from, { replace: true })
 
             })
 
-            .catch((error) => console.error(error));
+            .catch((error) => {
+                toast.error(error)
+            });
 
        
 
@@ -61,12 +64,12 @@ const Signup = () => {
                 saveUser(user.displayName, user.email, role, isVerified)
                 navigate(from, { replace: true })
             })
-            .catch(error => console.error(error))
+            .catch(error => toast.error(error))
     }
 
     const saveUser = (name, email, role, isVerified) => {
         const user = { name, email, role, isVerified };
-        fetch('http://localhost:5000/users', {
+        fetch('https://smoky-tyres-server.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -75,6 +78,7 @@ const Signup = () => {
         })
         .then(res => res.json())
         .then(() => {
+            toast.success('Successfully signed up')
             setEmail(email)
         })
     }

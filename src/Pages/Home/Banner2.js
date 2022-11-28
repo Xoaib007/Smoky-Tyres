@@ -3,10 +3,10 @@ import React from 'react';
 const Banner2 = () => {
     return (
         <div className='min-h-screen'>
-            <div className='flex pt-32'>
+            <div className='lg:flex pt-32'>
                 <div className='w-1/2 pt-10 pl-20'>
                     <p className='text-5xl font-bold'>Why us?</p>
-                    <div className='grid grid-cols-3 gap-10 mt-20'>
+                    <div className='grid grid-cols-3 gap-20 lg:gap-10 mt-20'>
                         <div>
                             <img className='w-fit mx-auto' src='https://cdn.bigboytoyz.com/new-version/assets/images/accidentalhistory-icon.png' alt=''/>
                             <p>NON ACCIDENTAL GUARANTEED</p>

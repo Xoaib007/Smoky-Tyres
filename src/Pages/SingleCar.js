@@ -7,6 +7,7 @@ import { authContext } from '../Context/AuthProvider';
 import { faBookmark } from '@fortawesome/free-regular-svg-icons';
 import TestDriveModal from './TestDriveModal';
 import { useQuery } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
 
 const SingleCar = () => {
     const [modal, setModal] = useState(null );
@@ -18,14 +19,14 @@ const SingleCar = () => {
 
     const { data: savedCar = [], refetch} = useQuery({
         queryKey: ['booking'],
-        queryFn: () => fetch(`http://localhost:5000/savedpost/${car._id}`).then(res => res.json())
+        queryFn: () => fetch(`https://smoky-tyres-server.vercel.app/savedpost/${car._id}`).then(res => res.json())
     })
 
     const [currentUser, setCurrentUser] = useState(null);
 
     useEffect(() => {
         if (user?.email) {
-            fetch(`http://localhost:5000/users/${user?.email}`).then(res => res.json()).then(data => {
+            fetch(`https://smoky-tyres-server.vercel.app/users/${user?.email}`).then(res => res.json()).then(data => {
                 setCurrentUser(data)
             })
         }
@@ -41,7 +42,7 @@ const SingleCar = () => {
             carSeller: car.seller,
             carPhoto: car.photo
         }
-        fetch('http://localhost:5000/savedpost',{
+        fetch('https://smoky-tyres-server.vercel.app/savedpost',{
             method: 'POST',
             headers:{
                 'content-type': 'application/json'
@@ -49,7 +50,9 @@ const SingleCar = () => {
             body: JSON.stringify(savedcar)
         })
         .then(res=> res.json())
-        .then(data=> refetch())
+        .then(data=> {
+            toast.success('Post saved successfully!!!')
+            refetch()})
     }
 
     const handleReport= (data)=>{
@@ -62,7 +65,7 @@ const SingleCar = () => {
             carSeller: car.seller,
             carPhoto: car.photo
         }
-        fetch('http://localhost:5000/reportedpost',{
+        fetch('https://smoky-tyres-server.vercel.app/reportedpost',{
             method: 'POST',
             headers:{
                 'content-type': 'application/json'
@@ -70,7 +73,10 @@ const SingleCar = () => {
             body: JSON.stringify(reportcar)
         })
         .then(res=> res.json())
-        .then(data=> refetch())
+        .then(data=> {
+            toast.success('Your report has been submitted. Admin will preview this post. Thanks')
+            refetch()
+        })
     }
 
     return (

@@ -11,7 +11,7 @@ const DashLayOut = () => {
 
     useEffect(() => {
         if (user?.email) {
-            fetch(`http://localhost:5000/users/${user?.email}`).then(res => res.json()).then(data => {
+            fetch(`https://smoky-tyres-server.vercel.app/users/${user?.email}`).then(res => res.json()).then(data => {
                 setCurrentUser(data)
             })
         }

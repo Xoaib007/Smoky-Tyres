@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { authContext } from '../../Context/AuthProvider';
 
@@ -20,7 +21,7 @@ const CreatePost = () => {
 
     const { data: categories = [] } = useQuery({
         queryKey: ['category'],
-        queryFn: () => fetch(`http://localhost:5000/categories`).then(res => res.json())
+        queryFn: () => fetch(`https://smoky-tyres-server.vercel.app/categories`).then(res => res.json())
     })
 
     const handleAddPost = (data, e) => {
@@ -58,7 +59,7 @@ const CreatePost = () => {
                         addedDate: current.toDateString()
                     }
 
-                    fetch('http://localhost:5000/cars', {
+                    fetch('https://smoky-tyres-server.vercel.app/cars', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',
@@ -67,6 +68,7 @@ const CreatePost = () => {
                     })
                         .then(res => res.json())
                         .then(result => {
+                            toast.success('Post created successfully')
                             form.reset();
                             navigate('/dash/seller/addedproducts')
                         })

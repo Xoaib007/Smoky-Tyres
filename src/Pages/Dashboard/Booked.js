@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { authContext } from '../../Context/AuthProvider';
 
@@ -11,12 +12,12 @@ const Booked = () => {
 
     const { data: bookings = [], refetch } = useQuery({
         queryKey: ['booking'],
-        queryFn: () => fetch(`http://localhost:5000/testdrivebooking/buyer/${user?.email}`).then(res => res.json())
+        queryFn: () => fetch(`https://smoky-tyres-server.vercel.app/testdrivebooking/buyer/${user?.email}`).then(res => res.json())
     })
 
     const handleCancelBooking = (data) => {
         console.log(data)
-        fetch(`http://localhost:5000/testdrivebooking/${data._id}`, {
+        fetch(`https://smoky-tyres-server.vercel.app/testdrivebooking/${data._id}`, {
             method: 'DELETE',
             // headers: {
             //     authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -25,6 +26,7 @@ const Booked = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.deletedCount > 0) {
+                    toast.success('Booking has been canceled')
                     refetch()
                 }
             })

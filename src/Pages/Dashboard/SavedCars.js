@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { authContext } from '../../Context/AuthProvider';
 
@@ -8,11 +9,11 @@ const SavedCars = () => {
 
     const { data: savedCars = [], refetch } = useQuery({
         queryKey: ['savedCrs'],
-        queryFn: () => fetch(`http://localhost:5000/savedpost/user/${user.email}`).then(res => res.json())
+        queryFn: () => fetch(`https://smoky-tyres-server.vercel.app/savedpost/user/${user.email}`).then(res => res.json())
     })
 
     const handleRemove = (data) => {
-        fetch(`http://localhost:5000/savedpost/${data.car}`, {
+        fetch(`https://smoky-tyres-server.vercel.app/savedpost/${data.car}`, {
             method: 'DELETE',
             // headers: {
             //     authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -21,6 +22,7 @@ const SavedCars = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.deletedCount > 0) {
+                    toast.success('Post removed from saved')
                     refetch()
                 }
             })

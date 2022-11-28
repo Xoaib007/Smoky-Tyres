@@ -1,32 +1,37 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import toast from 'react-hot-toast';
 
 const AllBuyers = () => {
 
     const { data: buyers = [], refetch } = useQuery({
         queryKey: ['booking'],
-        queryFn: () => fetch(`http://localhost:5000/user/buyers`).then(res => res.json())
+        queryFn: () => fetch(`https://smoky-tyres-server.vercel.app/user/buyers`).then(res => res.json())
     })
 
     const handleVerify = (data) => {
         const verifiedBuyer = data;
 
-        fetch(`http://localhost:5000/user/buyers/${verifiedBuyer}`, {
+        fetch(`https://smoky-tyres-server.vercel.app/user/buyers/${verifiedBuyer}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
             }
         })
         .then(res => res.json())
-        .then(data => refetch())
+        .then(data => {
+            toast.success('Verified user uccessfully')
+            refetch()})
     }
 
     const handleDeleteUser = (data)=>{
-        fetch(`http://localhost:5000/users/${data.email}`,{
+        fetch(`https://smoky-tyres-server.vercel.app/users/${data.email}`,{
             method: 'DELETE',
         })
         .then(res=> res.json())
-        .then(data=> refetch())
+        .then(data=> {
+            toast.success('Deleted user uccessfully')
+            refetch()})
     }
 
 

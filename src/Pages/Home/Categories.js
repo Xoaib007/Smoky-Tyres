@@ -6,7 +6,7 @@ const Categories = () => {
 
     const { data: categoriesData = [] } = useQuery({
         queryKey: ['category'],
-        queryFn: () => fetch(`http://localhost:5000/categories`).then(res => res.json())
+        queryFn: () => fetch(`https://smoky-tyres-server.vercel.app/categories`).then(res => res.json())
     })
 
     const categories= categoriesData.slice(3);
@@ -16,7 +16,7 @@ const Categories = () => {
             <div className=' w-fit px-10 border-x-8 border-red-600 mx-auto mb-20'>
                 <p className='text-3xl font-bold '>Categories</p>
             </div>
-            <div className='lg:w-4/5 w-full mx-auto grid grid-cols-2 lg:grid-cols-4 md:grid-cols-3 gap-0'>
+            <div className='lg:w-4/5 w-full mx-auto grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 gap-0'>
 
                 {
                     categories?.map(category =>

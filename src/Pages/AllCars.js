@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const AllCars = () => {
     const cars = useLoaderData();
 
+
     const navigate = useNavigate();
 
     return (

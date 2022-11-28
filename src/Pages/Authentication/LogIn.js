@@ -5,6 +5,7 @@ import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { authContext } from '../../Context/AuthProvider';
 import { GoogleAuthProvider } from 'firebase/auth';
+import toast from 'react-hot-toast';
 
 const LogIn = () => {
     const { register,handleSubmit, formState: { errors } } = useForm();
@@ -18,11 +19,13 @@ const LogIn = () => {
     const handleLogin = (data, e) => {
         const form = e.target
         signin(data.email, data.password)
-            .then(result => 
-                {form.reset();
+            .then(result =>{
+                toast.success('Login successfully')
+                form.reset();
                 navigate(from, { replace: true })
             })
-            .catch(error => console.error(error))
+            .catch(error => {
+                toast.error(error.message)})
     }
 
     const handleGoogleSignIn = () => {

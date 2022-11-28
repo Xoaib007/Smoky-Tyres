@@ -1,4 +1,5 @@
 import React from 'react';
+import toast from 'react-hot-toast';
 
 const TestDriveModal = ({ modal, setModal, currentUser }) => {
 
@@ -32,7 +33,7 @@ const TestDriveModal = ({ modal, setModal, currentUser }) => {
             isPaid: false,
         }
 
-        fetch('http://localhost:5000/testdrivebooking', {
+        fetch('https://smoky-tyres-server.vercel.app/testdrivebooking', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -40,7 +41,9 @@ const TestDriveModal = ({ modal, setModal, currentUser }) => {
             body: JSON.stringify(testDriveBooking)
         })
             .then(res => res.json())
-            .then(data=> setModal(null))
+            .then(data=>{
+                toast.success('Test drive booked successfully!! Visit dashboard to pay and confirm the booking.')
+                setModal(null)})
     }
     return (
         <div>

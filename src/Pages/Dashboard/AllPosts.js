@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { authContext } from '../../Context/AuthProvider';
 
@@ -9,7 +10,7 @@ const AllPosts = () => {
     const { data: allPosts = []} = useQuery({
         queryKey: ['allPosts'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/cars/email/${user?.email}`);
+            const res = await fetch(`https://smoky-tyres-server.vercel.app/cars/email/${user?.email}`);
             const data = await res.json();
             return data;
         }
@@ -17,7 +18,7 @@ const AllPosts = () => {
 
 
     const handleAdvertise= (data)=>{
-        fetch('http://localhost:5000/advertise',{
+        fetch('https://smoky-tyres-server.vercel.app/advertise',{
             method: 'POST',
             headers:{
                 'content-type': 'application/json'
@@ -25,6 +26,7 @@ const AllPosts = () => {
             body: JSON.stringify(data._id)
         })
         .then(res=> res.json())
+        .then(data=> toast.success('Post added to advertisement'))
     }
     return (
         <div>

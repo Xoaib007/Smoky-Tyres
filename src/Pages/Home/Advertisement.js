@@ -9,7 +9,7 @@ const Advertisement = () => {
     const [advertisement, setAdvertisement]= useState();
     
     useEffect(()=>{
-        fetch('http://localhost:5000/advertise')
+        fetch('https://smoky-tyres-server.vercel.app/advertise')
         .then(res=> res.json())
         .then(data=> setAdvertisement(data))
     },[])

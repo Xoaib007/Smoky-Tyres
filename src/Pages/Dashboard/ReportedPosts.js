@@ -1,16 +1,17 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 
 const ReportedPosts = () => {
 
     const { data: reportedPost = [], refetch } = useQuery({
         queryKey: ['reported'],
-        queryFn: () => fetch(`http://localhost:5000/reportedpost`).then(res => res.json())
+        queryFn: () => fetch(`https://smoky-tyres-server.vercel.app/reportedpost`).then(res => res.json())
     })
 
     const handleDeletePost = (data) => {
-        fetch(`http://localhost:5000/cars/${data.car}`, {
+        fetch(`https://smoky-tyres-server.vercel.app/cars/${data.car}`, {
             method: 'DELETE',
             // headers: {
             //     authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -19,11 +20,12 @@ const ReportedPosts = () => {
         .then(res => res.json())
         .then(data => {
             if (data.deletedCount > 0) {
+                toast.success('deleted post uccessfully')
                 refetch()
             }
         })
 
-        fetch(`http://localhost:5000/reportedpost/${data.car}`, {
+        fetch(`https://smoky-tyres-server.vercel.app/reportedpost/${data.car}`, {
             method: 'DELETE',
             // headers: {
             //     authorization: `bearer ${localStorage.getItem('accessToken')}`

@@ -41,17 +41,17 @@ const router= createBrowserRouter([
             {
                 path:'/category/:category',
                 element:<PrivateRoutes><AllCars/></PrivateRoutes>,
-                loader:({params})=> fetch(`http://localhost:5000/cars/${params.category}`),
+                loader:({params})=> fetch(`https://smoky-tyres-server.vercel.app/cars/${params.category}`),
             },
             {
                 path:'/cars/id/:id',
                 element:<PrivateRoutes><SingleCar/></PrivateRoutes>,
-                loader:({params})=> fetch(`http://localhost:5000/cars/id/${params.id}`),
+                loader:({params})=> fetch(`https://smoky-tyres-server.vercel.app/cars/id/${params.id}`),
             },
             {
                 path:'/buyer/bookings/:id',
                 element:<Payment/>,
-                loader: ({params})=> fetch(`http://localhost:5000/testdrivebooking/${params.id}`)
+                loader: ({params})=> fetch(`https://smoky-tyres-server.vercel.app/testdrivebooking/${params.id}`)
             },
         ]
     },
