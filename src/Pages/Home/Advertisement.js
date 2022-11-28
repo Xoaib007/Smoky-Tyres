@@ -15,7 +15,7 @@ const Advertisement = () => {
     },[])
 
     return (
-        <div className='mt-20'>
+        <div>
             <div className=' w-fit px-10 border-x-8 border-red-600 mx-auto mb-20'>
                 <p className='text-3xl font-bold '>Whats New!!!</p>
             </div>

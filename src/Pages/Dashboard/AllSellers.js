@@ -21,6 +21,14 @@ const AllSellers = () => {
         .then(data=> refetch())
     }
 
+    const handleDeleteUser = (data)=>{
+        fetch(`http://localhost:5000/users/${data.email}`,{
+            method: 'DELETE',
+        })
+        .then(res=> res.json())
+        .then(data=> refetch())
+    }
+
     return (
         <div>
             <div>
@@ -33,6 +41,7 @@ const AllSellers = () => {
                                     <th></th>
                                     <th>Name</th>
                                     <th>Email</th>
+                                    <th></th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -55,6 +64,10 @@ const AllSellers = () => {
                                                             <button className="btn btn-xs bg-green-600 rounded-none border-2 border-green-600 hover:bg-green-600 cursor-not-allowed hover:text-white hover:border-2 hover:border-green-600 mr-5" >Verified</button>
                                                         </>
                                                 }
+                                            </td>
+                                            
+                                            <td>
+                                                <button onClick={() => handleDeleteUser(seller)} className='btn btn-xs bg-red-600 rounded-none border-2 border-red-600 hover:bg-white hover:text-red-600 hover:border-2 hover:border-red-600 mr-5'>Delete User</button>
                                             </td>
                                         </tr>)
                                 }

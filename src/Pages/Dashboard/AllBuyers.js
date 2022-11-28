@@ -8,18 +8,27 @@ const AllBuyers = () => {
         queryFn: () => fetch(`http://localhost:5000/user/buyers`).then(res => res.json())
     })
 
-    const handleVerify = (data) =>{
-        const verifiedBuyer= data;
+    const handleVerify = (data) => {
+        const verifiedBuyer = data;
 
-        fetch(`http://localhost:5000/user/buyers/${verifiedBuyer}`,{
+        fetch(`http://localhost:5000/user/buyers/${verifiedBuyer}`, {
             method: 'PATCH',
-            headers:{
+            headers: {
                 'content-type': 'application/json'
             }
+        })
+        .then(res => res.json())
+        .then(data => refetch())
+    }
+
+    const handleDeleteUser = (data)=>{
+        fetch(`http://localhost:5000/users/${data.email}`,{
+            method: 'DELETE',
         })
         .then(res=> res.json())
         .then(data=> refetch())
     }
+
 
     return (
         <div>
@@ -34,6 +43,7 @@ const AllBuyers = () => {
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th></th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody className=''>
@@ -45,16 +55,19 @@ const AllBuyers = () => {
                                             <td>{buyer.name}</td>
                                             <td>{buyer.email}</td>
                                             <td>
-                                            {
-                                                buyer.isVerified === false ?
-                                                <>
-                                                    <button onClick={()=>handleVerify(buyer._id)} className="btn btn-xs bg-red-600 rounded-none border-2 border-red-600 hover:bg-white hover:text-red-600 hover:border-2 hover:border-red-600 mr-5" >Verify</button>
-                                                </>
-                                                :
-                                                <>
-                                                    <button className="btn btn-xs bg-green-600 rounded-none border-2 border-green-600 hover:bg-green-600 cursor-not-allowed hover:text-white hover:border-2 hover:border-green-600 mr-5" >Verified</button>
-                                                </>
-                                            }
+                                                {
+                                                    buyer.isVerified === false ?
+                                                    <>
+                                                        <button onClick={() => handleVerify(buyer._id)} className="btn btn-xs bg-red-600 rounded-none border-2 border-red-600 hover:bg-white hover:text-red-600 hover:border-2 hover:border-red-600 mr-5" >Verify</button>
+                                                    </>
+                                                    :
+                                                    <>
+                                                        <button className="btn btn-xs bg-green-600 rounded-none border-2 border-green-600 hover:bg-green-600 cursor-not-allowed hover:text-white hover:border-2 hover:border-green-600 mr-5" >Verified</button>
+                                                    </>
+                                                }
+                                            </td>
+                                            <td>
+                                                <button onClick={() => handleDeleteUser(buyer)} className='btn btn-xs bg-red-600 rounded-none border-2 border-red-600 hover:bg-white hover:text-red-600 hover:border-2 hover:border-red-600 mr-5'>Delete User</button>
                                             </td>
                                         </tr>)
                                 }

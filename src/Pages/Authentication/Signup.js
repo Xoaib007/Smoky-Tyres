@@ -27,7 +27,7 @@ const Signup = () => {
             role = 'Buyer'
         }
 
-        const verified = 'false';
+        const isVerified = false;
 
         createUser(data.email, data.password)
             .then(result => {
@@ -38,7 +38,7 @@ const Signup = () => {
                 updateUser(userInfo)
                     .then(() => {
 
-                        saveUser(data.name, data.email, role, verified)
+                        saveUser(data.name, data.email, role, isVerified)
                     })
                     .catch(error => console.error(error))
                 navigate(from, { replace: true })
@@ -53,19 +53,19 @@ const Signup = () => {
 
     const handleGoogleSignIn = () => {
         const role= 'Buyer';
-        const verified= 'false';
+        const isVerified = false;
         googleSignIn(provider)
             .then(result => {
                 const user= result.user;
 
-                saveUser(user.displayName, user.email, role, verified)
+                saveUser(user.displayName, user.email, role, isVerified)
                 navigate(from, { replace: true })
             })
             .catch(error => console.error(error))
     }
 
-    const saveUser = (name, email, role, verified) => {
-        const user = { name, email, role, verified };
+    const saveUser = (name, email, role, isVerified) => {
+        const user = { name, email, role, isVerified };
         fetch('http://localhost:5000/users', {
             method: 'POST',
             headers: {
