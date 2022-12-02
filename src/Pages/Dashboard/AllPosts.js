@@ -23,10 +23,10 @@ const AllPosts = () => {
             headers:{
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(data._id)
+            body: JSON.stringify(data)
         })
         .then(res=> res.json())
-        .then(data=> toast.success('Post added to advertisement'))
+        .then(data => toast.success('Post added to advertisement'))
     }
     return (
         <div>
@@ -77,7 +77,9 @@ const AllPosts = () => {
                                             <Link to={`/cars/id/${post._id}`} className="btn bg-red-600 rounded-none btn-xs">Details</Link>
                                         </td>
                                         <td>
-                                            <button onClick={()=>handleAdvertise(post)} className="btn btn-xs bg-red-600 rounded-none border-2 border-red-600 hover:bg-white hover:text-red-600 hover:border-2 hover:border-red-600">Advertise</button>
+                                        <button onClick={()=>handleAdvertise(post)} className="btn btn-xs bg-red-600 rounded-none border-2 border-red-600 hover:bg-white hover:text-red-600 hover:border-2 hover:border-red-600">Advertise</button>
+                                        
+                                            
                                         </td>
                                     </tr>)
                             }

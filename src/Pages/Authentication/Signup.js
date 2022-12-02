@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { authContext } from '../../Context/AuthProvider';
 import { GoogleAuthProvider } from 'firebase/auth';
 import toast from 'react-hot-toast';
@@ -18,6 +19,8 @@ const Signup = () => {
     const location = useLocation();
 
     const from = location.state?.from?.pathname || '/';
+
+    const [passwordType, setPasswordType] = useState("password");
 
     const handleSignUp = data => {
         let role = data.role;
@@ -83,20 +86,28 @@ const Signup = () => {
         })
     }
 
+    const togglePassword = () => {
+        if (passwordType === "password") {
+            setPasswordType("text")
+            return;
+        }
+        setPasswordType("password")
+    }
+
     return (
         <div>
             <div className="hero min-h-screen bg3">
-                <div className="hero-content lg:w-6/12 bg-transparent relative left-80 ">
+                <div className="hero-content lg:w-6/12 bg-transparent lg:relative lg:left-80 ">
                     <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-transparent ">
                         <h1 className="text-5xl font-bold ml-8 text-white">Sign Up</h1>
                         <form onSubmit={handleSubmit(handleSignUp)} className="card-body">
-                            <div className="form-control w-full">
+                            <div className="form-control w-10/12 mx-auto">
                                 <label className="label">
                                     <span className="label-text text-white">Name</span>
                                 </label>
                                 <input {...register("name", { required: true })} type="text" placeholder="Full Name" className="input input-bordered" />
                             </div>
-                            <div className="form-control w-full">
+                            <div className="form-control w-10/12 mx-auto">
                                 <label className="label">
                                     <span className="label-text text-white">Email</span>
                                 </label>
@@ -105,9 +116,20 @@ const Signup = () => {
                             </div>
                             <div className="form-control">
                                 <label className="label">
-                                    <span className="label-text text-white">Password</span>
+                                    <span className="label-text ml-5 text-white">Password</span>
                                 </label>
-                                <input {...register("password", { required: true, minLength: { value: 7, message: 'Password must be longer than 7 charecter' } })} type="password" placeholder="password" className="input input-bordered" />
+                                <div>
+                                    <input {...register("password", { required: true, minLength: { value: 7, message: 'Password must be longer than 7 charecter' } })} type={passwordType} placeholder="password" className="input input-bordered rounded-r-none" />
+
+                                    <button onClick={togglePassword} className="btn btn-outline-primary rounded-l-none bg-white text-black border-none focus:bg-white " >
+                                        {
+                                            passwordType === "password" ?
+                                            <FontAwesomeIcon icon={faEye} />
+                                            :
+                                            <FontAwesomeIcon icon={faEyeSlash} />
+                                        }
+                                    </button>
+                                </div>
                                 {errors.password && <p className='text-error' role="alert">{errors.password?.message}</p>}
                                 <label className="label">
                                     <Link href="#" className="label-text-alt link link-hover text-white">Forgot password?</Link>
