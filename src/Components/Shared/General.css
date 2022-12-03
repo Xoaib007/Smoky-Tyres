@@ -2,7 +2,7 @@
     font-family: 'Nova Square', cursive;
 }
 .bg1 {
-    background-image: url('https://i.ibb.co/wp6KwPc/banner.jpg');
+    background-image: url('https://i.ibb.co/qChYVgk/Daredevil-Desktop-1600x900.jpg');
     background-repeat: no-repeat;
 }
 
@@ -11,6 +11,10 @@
 }
 .bg3 {
     background-image: url('https://i.ibb.co/vmsM2Kh/Tough-Built-Desktop-1600x900-v2.jpg');
+    background-repeat: no-repeat;
+}
+.bgsm {
+    background-image: url('https://i.ibb.co/4JSTxfw/bannersm.jpg');
     background-repeat: no-repeat;
 }
 .active{

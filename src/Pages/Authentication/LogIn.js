@@ -10,7 +10,7 @@ import toast from 'react-hot-toast';
 
 const LogIn = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { signin, googleSignIn } = useContext(authContext);
+    const { signin, googleSignIn }= useContext(authContext);
     const provider = new GoogleAuthProvider();
     const navigate = useNavigate();
     const location = useLocation();
@@ -45,7 +45,6 @@ const LogIn = () => {
     const togglePassword = () => {
         if (passwordType === "password") {
             setPasswordType("text")
-            return;
         }
         setPasswordType("password")
     }

@@ -2,7 +2,7 @@ import React from 'react';
 
 const Banner2 = () => {
     return (
-        <div className='min-h-screen'>
+        <div className='min-h-screen lg:display hidden'>
             <div className='lg:flex pt-32'>
                 <div className='w-1/2 pt-10 pl-20'>
                     <p className='text-5xl font-bold'>Why us?</p>

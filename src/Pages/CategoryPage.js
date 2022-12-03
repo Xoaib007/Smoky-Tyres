@@ -13,7 +13,7 @@ const CategoryPage = () => {
                 <div className=' w-fit px-10 border-x-8 border-red-600 mx-auto mb-20'>
                     <p className='text-4xl font-bold '>All Categories</p>
                 </div>
-                <div className='w-4/5 mx-auto grid grid-cols-4 gap-0'>
+                <div className='w-4/5 mx-auto grid grid-cols-1 lg:grid-cols-4 gap-0'>
 
                     {
                         categories?.map(category =>
@@ -25,7 +25,7 @@ const CategoryPage = () => {
                                         </div>
                                         <span className="font-bold">{category.name}</span>
                                     </div>
-                                    <img src={`${category.model}`} alt="Eco-friendly" className="relative bottom-28 left-3 hover:left-8" />
+                                    <img src={`${category.model}`} alt="Eco-friendly" className="relative bottom-28 left-3 hover:left-8 w-4/5" />
                                 </div>
                             </Link>
                         )
