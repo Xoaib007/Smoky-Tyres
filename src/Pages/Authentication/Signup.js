@@ -121,7 +121,7 @@ const Signup = () => {
                                 <div>
                                     <input {...register("password", { required: true, minLength: { value: 7, message: 'Password must be longer than 7 charecter' } })} type={passwordType} placeholder="password" className="input input-bordered rounded-r-none" />
 
-                                    <button onClick={togglePassword} className="btn btn-outline-primary rounded-l-none bg-white text-black border-none focus:bg-white " >
+                                    <button type='button' onClick={togglePassword} className="btn btn-outline-primary rounded-l-none bg-white text-black border-none focus:bg-white " >
                                         {
                                             passwordType === "password" ?
                                             <FontAwesomeIcon icon={faEye} />

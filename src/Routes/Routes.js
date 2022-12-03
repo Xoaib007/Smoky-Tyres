@@ -18,7 +18,10 @@ import ErrorPage from "../Pages/ErrorPage";
 import HomePage from "../Pages/Home/HomePage";
 import Payment from "../Pages/Payment/Payment";
 import SingleCar from "../Pages/SingleCar";
+import AdminRoute from "./AdminRoute";
+import BuyerRoute from "./BuyerRoute";
 import PrivateRoutes from "./PrivateRoute";
+import SellerRoute from "./SellerRoute";
 
 const router= createBrowserRouter([
     {
@@ -77,31 +80,31 @@ const router= createBrowserRouter([
         children:[
             {
                 path:'/dash/seller/addproduct',
-                element:<CreatePost/>
+                element:<SellerRoute><CreatePost/></SellerRoute>
             },
             {
                 path:'/dash/seller/addedproducts',
-                element:<AllPosts/>
+                element:<SellerRoute><AllPosts/></SellerRoute>
             },
             {
                 path:'/dash/buyer/bookings',
-                element:<Booked/>
+                element:<BuyerRoute><Booked/></BuyerRoute>
             },
             {
                 path:'/dash/buyer/saved',
-                element:<SavedCars/>
+                element:<BuyerRoute><SavedCars/></BuyerRoute>
             },
             {
                 path:'/dash/admin/allbuyers',
-                element:<AllBuyers/>
+                element:<AdminRoute><AllBuyers/></AdminRoute> 
             },
             {
                 path:'/dash/admin/allsellers',
-                element:<AllSellers/>
+                element:<AdminRoute><AllSellers/></AdminRoute>
             },
             {
                 path:'/dash/admin/reported',
-                element:<ReportedPosts/>
+                element:<AdminRoute><ReportedPosts/></AdminRoute>
             }
         ]
     }

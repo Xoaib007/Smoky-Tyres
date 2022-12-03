@@ -44,7 +44,7 @@ const Advertisement = () => {
                                 <p className='text-left font-bold mt-6'>Posted By: {advertisedPost.seller}</p>
 
                             </div>
-                            <Link to={`/cars/id/${advertisedPost._id}`} className='btn btn-lg bg-transparent text-black
+                            <Link to={`/cars/id/${advertisedPost.post}`} className='btn btn-lg bg-transparent text-black
                                 border-none hover:bg-transparent hover:text-red-600 relative left-28 px-0 mx-0 '
                             ><FontAwesomeIcon className='h-8 w-8' icon={faAngleRight} /></Link>
 
