@@ -12,4 +12,6 @@ This is a luxury car reselling website <br/> Buyers can book test drive and buy 
 This is a third party website to connect buyer and seller <br/>
 Buyers can post cars with a detailed requirement <br/>
 
-Project started: 
+Project started: November 23, 2022
+
+Technology used: ReactJS, Firebase, TailwindCSS
